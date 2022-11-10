@@ -28,10 +28,4 @@ public class Bins {
         return theBins.get(roll_binNum) / (float) totalincrements;
     }
 
-    public int getAverage(Integer roll_binNum) {
-        int sum = 0;
-        for(int i = 0 ; i < getSpecificBin(roll_binNum) ; i++) { sum += i; }
-        return sum / getSpecificBin(roll_binNum);
-    }
-
 }

@@ -7,6 +7,10 @@ public class Dice {
         this.numOfDice = numOfDice;
     }
 
+    public int dieCount(){
+        return numOfDice;
+    }
+
     public int tossAndSum() { //rolls dice
         Random rand = new Random();
         int sum = 0;

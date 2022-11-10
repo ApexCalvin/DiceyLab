@@ -15,16 +15,12 @@ public class Simulation {
 
         sim.runSim();
         sim.displayResult();
-
-//        System.out.println("2 " + displayStars(2));
-//        System.out.println("4 " + displayStars(4));
-//        System.out.println("6 " + displayStars(6));
-//        System.out.println("8 " + displayStars(8));
-//        System.out.println("10 " + displayStars(10));
     }
     public static String displayStars(int binNum) {
         String stars = "";
-            for(int i = 0 ; i < Math.round(batchOfBins.getAverage(binNum)) ; i++) { stars += "*"; }
+        for(int j = 0 ; j < Math.round(batchOfBins.rollPercPerBin(binNum) * 100) ; j++) {
+            stars += "*";
+        }
         return stars;
     }
     public Simulation(int numOfDice, int amountOfRolls) { //[CONSTRUCTOR]
@@ -46,8 +42,8 @@ public class Simulation {
     public void displayResult() {
         System.out.println("");
         for(int i = numOfDice; i <= binUpperLimit ; i++) {
-            System.out.printf("%2s | %10s | %.2f %n", i,
-                    batchOfBins.getSpecificBin(i).toString(), batchOfBins.rollPercPerBin(i));
+            System.out.printf("%2s | %10s | %.2f | %2s %n", i,
+                    batchOfBins.getSpecificBin(i).toString(), batchOfBins.rollPercPerBin(i), displayStars(i));
         }
     }
 }
