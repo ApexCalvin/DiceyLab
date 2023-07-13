@@ -7,7 +7,7 @@ public class programTest {
     public void numOfDiceTest1() {
        Dice dice = new Dice(2);
         int expected = 2;
-        int actual = dice.dieCount();
+        int actual = dice.getDieCount();
         Assert.assertEquals(expected, actual);
     }
 
@@ -15,29 +15,29 @@ public class programTest {
     public void numOfDiceTest2() {
         Dice dice = new Dice(3);
         int expected = 3;
-        int actual = dice.dieCount();
+        int actual = dice.getDieCount();
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void numOfDiceBins1() { //value
         Bins testbin = new Bins(1, 6);
-        testbin.addRollValuetoBin(4);
-        testbin.addRollValuetoBin(4);
+        testbin.addSumToBin(4);
+        testbin.addSumToBin(4);
         int expected = 2;
-        int actual = testbin.getSpecificBin(4);
+        int actual = testbin.getValueOfBin(4);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void numOfDiceBins2() {
         Bins testbin = new Bins(2, 12);
-        testbin.addRollValuetoBin(7);
-        testbin.addRollValuetoBin(7);
-        testbin.addRollValuetoBin(7);
-        testbin.addRollValuetoBin(7);
+        testbin.addSumToBin(7);
+        testbin.addSumToBin(7);
+        testbin.addSumToBin(7);
+        testbin.addSumToBin(7);
         int expected = 4;
-        int actual = testbin.getSpecificBin(7);
+        int actual = testbin.getValueOfBin(7);
         Assert.assertEquals(expected, actual);
     }
 //    @Test
@@ -59,7 +59,7 @@ public class programTest {
     public void binRangeTest1() {
         Bins testbin = new Bins(2, 12);
         int expected = 11;
-        int actual = testbin.numOfBins();
+        int actual = testbin.getNumOfBins();
         Assert.assertEquals(expected, actual);
     }
 
@@ -67,7 +67,7 @@ public class programTest {
     public void binRangeTest2() {
         Bins testbin = new Bins(1, 6);
         int expected = 6;
-        int actual = testbin.numOfBins();
+        int actual = testbin.getNumOfBins();
         Assert.assertEquals(expected, actual);
     }
 }

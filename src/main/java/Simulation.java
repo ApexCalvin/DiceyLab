@@ -1,49 +1,52 @@
-import java.util.Random;
-
 public class Simulation {
-    public static int numOfDice;
-    public static int amountOfRolls;
-    public static int binUpperLimit;
-    public static Bins batchOfBins;
 
-    public static void main(String[] args) {
+    private final int numOfDice;
 
-        int numOfDice = 2;
-        int amountOfRolls = 100000; //hunned thou
+    private final int amountOfRolls;
 
-        Simulation sim = new Simulation(numOfDice, amountOfRolls);
+    private final Bins binsContainer;
 
-        sim.runSim();
-        sim.displayResult();
-    }
-    public static String displayStars(int binNum) {
-        String stars = "";
-        for(int j = 0 ; j < Math.round(batchOfBins.rollPercPerBin(binNum) * 100) ; j++) {
-            stars += "*";
-        }
-        return stars;
-    }
-    public Simulation(int numOfDice, int amountOfRolls) { //[CONSTRUCTOR]
-        Simulation.numOfDice = numOfDice;
-        Simulation.amountOfRolls = amountOfRolls;
+    private final int binUpperLimit;
+
+    public Simulation(int numOfDice, int amountOfRolls) {
+
+        this.numOfDice = numOfDice;
+        this.amountOfRolls = amountOfRolls;
 
         binUpperLimit = numOfDice * 6;
 
-        batchOfBins = new Bins(numOfDice, binUpperLimit); //creates a map of bins, ex. 2 to 12
+        binsContainer = new Bins(numOfDice, binUpperLimit);
     }
+
     public void runSim() {
-        Dice dice = new Dice(numOfDice);
-        //Dice dice = new Dice(numOfDice); //creates plural obj & set num of die
+
+        Dice diceInHand = new Dice(numOfDice); //creates plural obj & set num of die
 
         for(int i = 0 ; i < amountOfRolls ; i++) {
-            batchOfBins.addRollValuetoBin(dice.tossAndSum());
+
+            binsContainer.addSumToBin(diceInHand.tossAndSum());
         }
     }
+
     public void displayResult() {
-        System.out.println("");
-        for(int i = numOfDice; i <= binUpperLimit ; i++) {
+
+        System.out.println();
+
+        for(int i = numOfDice ; i <= binUpperLimit ; i++) {
             System.out.printf("%2s | %10s | %.2f | %2s %n", i,
-                    batchOfBins.getSpecificBin(i).toString(), batchOfBins.rollPercPerBin(i), displayStars(i));
+                    binsContainer.getValueOfBin(i).toString(), binsContainer.getRollPercentageOfBin(i), displayStars(i));
         }
+    }
+
+    public String displayStars(int binNum) {
+
+        StringBuilder stars = new StringBuilder();
+
+        for(int j = 0 ; j < Math.round(binsContainer.getRollPercentageOfBin(binNum) * 100) ; j++) {
+
+            stars.append("*");
+        }
+
+        return stars.toString();
     }
 }

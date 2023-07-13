@@ -1,31 +1,36 @@
 import java.util.TreeMap;
 
 public class Bins {
-    private final TreeMap<Integer, Integer> theBins;
-    private Integer totalincrements = 0; //amount of simulations/rolls
-    public Bins(int lowerLimit, int upperLimit) { //[CONSTRUCTOR]
 
-        theBins = new TreeMap<Integer, Integer>(); //creating batch (of bins)
+    private final TreeMap<Integer, Integer> theseBins;
 
-        //Creates bins (IN the batch)
-        for (int i = lowerLimit; i <= upperLimit; i++) { theBins.put(i, 0); }
+    private Integer totalRolls = 0;
+
+    public Bins(int lowerLimit, int upperLimit) {
+
+        theseBins = new TreeMap<Integer, Integer>();
+
+        for (int i = lowerLimit ; i <= upperLimit ; i++) {
+
+            theseBins.put(i, 0);
+        }
     }
 
-    public Integer numOfBins() { return theBins.size(); }
+    public void addSumToBin(Integer roll_binNum) {
 
-    public Integer getSpecificBin(Integer roll_binNum) { return theBins.get(roll_binNum); }
-    // ^ get "value" in specific bin"
+        // < key = Sum number, value = Sum Frequency >
+        theseBins.put(roll_binNum, theseBins.get(roll_binNum) + 1);
 
-    public void addRollValuetoBin(Integer roll_binNum) {
-        //System.out.print(roll_binNum + " ");
-        //Searching thebins for the correct bin , get current value of bin & add roll (+1)
-        theBins.put(roll_binNum, theBins.get(roll_binNum) + 1);
-        totalincrements++;
+        totalRolls++;
     }
 
-    public Float rollPercPerBin(Integer roll_binNum) {
-        // the value of rolls in the spec bin of the param / totalinc
-        return theBins.get(roll_binNum) / (float) totalincrements;
+    public Integer getNumOfBins() { return theseBins.size(); }
+
+    public Integer getValueOfBin(Integer roll_binNum) { return theseBins.get(roll_binNum); }
+
+    public Float getRollPercentageOfBin(Integer roll_binNum) {
+
+        return theseBins.get(roll_binNum) / (float) totalRolls;
     }
 
 }
